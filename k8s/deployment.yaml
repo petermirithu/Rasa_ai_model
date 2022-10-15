@@ -16,7 +16,7 @@ spec:
       - name: rasa
         image: rasa/rasa:2.1.2
         ports:
-        - 5005:5005
+        - 5005: 5005
         volumes:
         - ./:/app/
         command:         
