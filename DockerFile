@@ -1,14 +1,15 @@
-FROM rasa/rasa-sdk:2.1.2
+FROM python:3.8.3
+
+RUN python -m pip install rasa==2.1.2
+
 WORKDIR /app
-COPY . /app
 
-USER root
+COPY . .
 
-COPY .data /app/data
-RUN rasa train
+RUN rasa train nlu
 
-VOLUME /app
-VOLUME /app/data
-VOLUME /app/models 
+USER 1001
 
-CMD ["run","-m","/app/models","--enable-api","--cors","*","--debug" ,"--endpoints", "endpoints.yml", "--log-file", "out.log", "--debug"]
+ENTRYPOINT ["rasa"]
+
+CMD ["run","--enable-api","--port","8080"]
