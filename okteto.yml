@@ -1,5 +1,5 @@
 build:
-  hello-world:
+  usiu-rasa-bot:
      image: okteto.dev/usiu-rasa-bot:latest
      context: .
      dockerfile: Dockerfile
