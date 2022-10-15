@@ -1,0 +1,7 @@
+build:
+  usiu-rasa-bot:
+     image: okteto.dev/usiu-rasa-bot:latest
+     context: .
+     dockerfile: Dockerfile
+deploy:
+  - kubectl apply -f k8s

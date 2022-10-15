@@ -1,0 +1,29 @@
+# Extend the official Rasa SDK image
+FROM rasa/rasa-sdk:2.1.2
+# Use subdirectory as working directory
+WORKDIR /app
+# Copy any additional custom requirements, if necessary (uncomment next line)
+# COPY actions/requirements-actions.txt ./
+
+# Change back to root user to install dependencies
+USER root
+# Install extra requirements for actions code, if necessary (uncomment next line)
+# RUN pip install -r requirements-actions.txt
+RUN python -m venv /opt/venv && . /opt/venv/bin/activate && pip install --upgrade pip && pip install rasa==2.1.2
+  # RUN pip install python-dotenv==0.15.0
+  # RUN pip install sendgrid
+ENV PATH="/opt/venv/bin:$PATH"
+# Copy actions folder to working directory
+COPY ./actions /app/actions
+# By best practices, don't run the code with root user |:- 'change permissions'
+RUN chgrp -R 0 /app && chmod -R g=u /app
+USER 1001
+
+# create a volume for temporary data
+VOLUME /tmp
+
+#Change shell
+# SHELL ["/bin/bash", "-o", "pipefail", "-c"]
+
+# Entry point
+EXPOSE 5005
