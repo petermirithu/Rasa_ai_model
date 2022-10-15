@@ -8,11 +8,14 @@ RUN python -m venv /opt/venv && . /opt/venv/bin/activate && pip install --upgrad
 
 ENV PATH="/opt/venv/bin:$PATH"
 
+RUN rasa train && rasa run --enable-api --cors "*"
+
 COPY ./actions /app/actions
 
 RUN chgrp -R 0 /app && chmod -R g=u /app
 USER 1001
 
 VOLUME /tmp
+
 
 EXPOSE 5005
