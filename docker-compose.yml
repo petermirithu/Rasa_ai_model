@@ -1,0 +1,34 @@
+version: '2.1'
+services:
+  rasa:
+    image: rasa/rasa:2.1.2
+    user: root 
+    build: './'        
+    volumes:
+      - ./:/app/        
+    command: bash -c "rm -rf .rasa/* && rasa train && rasa run --enable-api --cors \"*\""
+    working_dir: /app
+    ports:
+    - '5005:5005'    
+    depends_on: 
+      - rasa-actions    
+    networks:
+      - all
+
+  rasa-actions:
+    image: usiu-rasa-bot:latest
+    build: './'       
+    volumes: 
+      - ./actions:/app/actions
+    command: bash -c "rasa run actions"
+    working_dir: /app
+    ports:
+      - '5055:5055'
+    networks:
+      - all
+  
+  networks:
+    all:
+      driver: bridge
+      driver_opts:
+        com.docker.network.enable.ipv6: "true"
