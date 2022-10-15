@@ -13,7 +13,27 @@ spec:
         app: usiu-rasa-bot
     spec:
       containers:
+      - name: rasa
+        image: rasa/rasa:2.1.2
+        ports:
+        - 5005:5005
+        volumes:
+        - ./:/app/
+        command:         
+          - run          
+          - --enable-api
+          - --cors
+          - "*"   
+          - --credentials
+          - credentials.yml 
+          - --endpoints
+          - endpoints.yml 
+          - --auth-token
+          - "@dsuicdsucs873bxanapomxknc>*&e!"                  
+
       - name: usiu-rasa-bot
         image: okteto.dev/usiu-rasa-bot:latest
+        volumes:
+        - ./actions:/app/actions
         ports:
-        - containerPort: 8080
+        - 5055: 5055
