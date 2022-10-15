@@ -6,7 +6,7 @@ services:
     build: './'        
     volumes:
       - ./:/app/        
-    command: bash -c "rm -rf .rasa/* && rasa train && rasa run --enable-api --cors \"*\""
+    command: bash -c "rasa train && rasa run --enable-api --cors \"*\""
     working_dir: /app
     ports:
     - '5005:8080'    
