@@ -1,7 +1,45 @@
+name: rasa-ai-model
+
+# The build section defines how to build the images of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#build
 build:
+
+  # You can use the following env vars to refer to this image in your deploy commands:
+  #  - OKTETO_BUILD_USIU_RASA_BOT_REGISTRY: image registry
+  #  - OKTETO_BUILD_USIU_RASA_BOT_REPOSITORY: image repo
+  #  - OKTETO_BUILD_USIU_RASA_BOT_IMAGE: image name
+  #  - OKTETO_BUILD_USIU_RASA_BOT_TAG: image tag
   usiu-rasa-bot:
-    image: okteto.dev/usiu-rasa-bot:latest
     context: .
     dockerfile: DockerFile
+    image: okteto.dev/usiu-rasa-bot:latest
+
+# The deploy section defines how to deploy your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#deploy
 deploy:
   - kubectl apply -f k8s
+
+# The dependencies section defines other git repositories to be deployed as part of your development environment
+# More info: https://www.okteto.com/docs/reference/manifest/#dependencies
+# dependencies:
+#   - https://github.com/okteto/sample
+
+
+# The dev section defines how to activate a development container
+# More info: https://www.okteto.com/docs/reference/manifest/#dev
+dev:
+  usiu-rasa-bot:
+    image: okteto.dev/usiu-rasa-bot:latest
+    command: bash
+    workdir: /app
+    securityContext:
+      runAsUser: 1001
+    sync:
+      - .:/app
+    forward:
+      - 8080:8080
+    reverse:
+      - 9000:9000
+    volumes:
+      - /root/.cache/pip
+

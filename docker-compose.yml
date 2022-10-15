@@ -9,7 +9,7 @@ services:
     command: bash -c "rm -rf .rasa/* && rasa train && rasa run --enable-api --cors \"*\""
     working_dir: /app
     ports:
-    - '5005:5005'    
+    - '5005:8080'    
     depends_on: 
       - rasa-actions    
     networks:
