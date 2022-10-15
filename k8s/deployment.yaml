@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: usiu-rasa-bot
+spec:
+  selector:
+    matchLabels:
+      app: usiu-rasa-bot
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: usiu-rasa-bot
+    spec:
+      containers:
+      - name: usiu-rasa-bot
+        image: okteto.dev/usiu-rasa-bot:latest
+        ports:
+        - containerPort: 8080

@@ -1,0 +1,6 @@
+.github
+docker
+README.md
+*.pem
+**/__pycache__/
+docker-compose.yml
