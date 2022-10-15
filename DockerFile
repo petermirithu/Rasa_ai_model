@@ -1,15 +1,18 @@
-FROM python:3.8.3
-
-RUN python -m pip install rasa==2.1.2
+FROM rasa/rasa-sdk:2.1.2
 
 WORKDIR /app
 
-COPY . .
+USER root
 
-RUN rasa train nlu
+RUN python -m venv /opt/venv && . /opt/venv/bin/activate && pip install --upgrade pip && pip install rasa==2.1.2
 
+ENV PATH="/opt/venv/bin:$PATH"
+
+COPY ./actions /app/actions
+
+RUN chgrp -R 0 /app && chmod -R g=u /app
 USER 1001
 
-ENTRYPOINT ["rasa"]
+VOLUME /tmp
 
-CMD ["run","--enable-api","--port","8080"]
+EXPOSE 5005
