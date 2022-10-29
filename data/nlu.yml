@@ -1,5 +1,4 @@
 version: "2.0"
-
 nlu:
 - intent: greet
   examples: |
@@ -16,7 +15,8 @@ nlu:
     - goodmorning
     - goodevening
     - good afternoon
-
+    - Yooh
+    
 - intent: goodbye
   examples: |
     - good afternoon
@@ -30,6 +30,14 @@ nlu:
     - see you around
     - bye bye
     - see you later
+    - no thats all
+    - thanks a lot
+    - i appreciate
+    - no thanks. Am good
+    - thanks for your help today.
+    - ok thank you
+    - ok thanks
+    - hope to here from you soon
 
 - intent: affirm
   examples: |
@@ -39,7 +47,10 @@ nlu:
     - of course
     - that sounds good
     - correct
-
+    - yes it helped
+    - yah
+    - how are you
+    - yap
 - intent: deny
   examples: |
     - no
@@ -49,6 +60,7 @@ nlu:
     - don't like that
     - no way
     - not really
+    - nop
 
 - intent: mood_great
   examples: |
@@ -90,3 +102,91 @@ nlu:
     - are you a human?
     - am I talking to a bot?
     - am I talking to a human?
+    - who is this
+    - who are you        
+
+- intent: check_grades
+  examples: |
+  - how do i check at my grades?
+  - what are my grades?
+  - how did i do in that exam?
+  - what marks did i get in that cat?
+  - have i passed or failed the exam?
+  - have i passed or failed the class?
+  - have the grades been released?
+
+- intent: check_upcoming_assignments
+  examples: |
+  - how do i check for any assignments?
+  - do i have any new assignment?
+  - has the lecturer uploaded any assignment?
+  - what is due today?
+  - any homework left?
+  - any work given today?
+
+- intent: check_upcoming_assignments_course
+  examples: |
+  - via the course
+  - view for specific course  
+
+- intent: check_upcoming_assignments_calendar
+  examples: |
+  - via the calendar
+  - view all assignments
+
+- intent: get_class_info 
+  examples: |
+  - what is APT3010 about?
+  - what is IST3050 about?
+  - what is the class about?
+  - what is taught in this class?
+  - what time does the class start?
+  - what time does the class end?
+  - when is the class?
+  - who teaches the class?
+  - which lecturer teaches the class?
+  - where is the class?
+  - under which building does the class take place?
+
+- intent: how_to_pick_courses
+  examples: |
+  - how do i pick courses?
+  - how do i register for new courses?
+  - how do i get into a new class?
+  - how to register for next semester classes  
+
+- intent: how_to_drop_courses
+  examples: |
+  - how do i drop a class?
+  - how do i deregister a class?
+  - how do i get out of a class?
+  - how do i drop a course?
+  - how to drop courses
+
+- intent: check_school_fees
+  examples: |
+  - how much i am paying for next semester?
+  - what amount will i be paying next sem?
+  - school fees to be paid next semester?
+
+- intent: how_to_pay_school_fees
+  examples: |
+  - how do i pay school fees?
+  - which payment methods are available to pay for school fees?
+  - can i pay via mpesa?
+  - can i do a bank deposit?
+  - does the school accept bank deposits?
+  - does the schoold accept mpesa payments?
+
+- intent: how_to_change_usiu_password
+  examples: |
+  - how do i change my password?
+  - how do i reset my password?
+  - i am locked out of blackboard. Please help!
+  - my account is locked
+
+
+
+
+
+

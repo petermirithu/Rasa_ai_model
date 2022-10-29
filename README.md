@@ -35,3 +35,12 @@ AI model for for the Rasa chat bot
 * Make sure the features you work are not the same as those of team members
 * Always update main and then rebase with you branch before pushing the code to git hub
 * Raise a pull request and tag the admin to review    
+
+# Documentation
+## How to connect to the AI bot
+* Use the api url: http://localhost:5005/webhooks/rest/webhook
+* Use POST method
+* Body of the post should be raw data, basically JSON in the format    
+    
+
+

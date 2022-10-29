@@ -1,6 +1,7 @@
+version: "2.0"
 session_config:
   session_expiration_time: 60
-  carry_over_slots_to_new_session: true
+  carry_over_slots_to_new_session: false
 intents:
 - greet
 - goodbye
@@ -9,17 +10,71 @@ intents:
 - mood_great
 - mood_unhappy
 - bot_challenge
-responses:
-  utter_greet:
-  - text: Hey! How are you?
+- check_grades
+- check_upcoming_assignments
+- check_upcoming_assignments_course
+- check_upcoming_assignments_calendar
+- get_class_info
+- how_to_pick_courses
+- how_to_drop_courses
+- check_school_fees
+- how_to_pay_school_fees
+- how_to_change_usiu_password
+responses:  
   utter_cheer_up:
   - image: https://i.imgur.com/nGF1K8f.jpg
     text: 'Here is something to cheer you up:'
   utter_did_that_help:
-  - text: Did that help you?
+  - buttons:
+    - payload: /affirm
+      title: 👍
+    - payload: /deny
+      title: 👎
+    text: Did that help you?
   utter_happy:
   - text: Great, carry on!
   utter_goodbye:
-  - text: Bye
+  - text: Thanks for getting in touch today – I appreciate your time.
   utter_iamabot:
-  - text: I am a bot, powered by Rasa.
+  - text: I am a bot called Buzz bot. Your USIU personal assistant.
+  utter_grades:
+  - text: To check for your grades, you first have to\:\n
+          1. Login to blackboard \n
+          2. On the landing page just after logging in, you will see *My courses* section which contains a list of courses you are currently enrolled in. Select the course you would like to check your grades in.\n
+          3. After selecting a course, scroll down a bit. On the left panel or side, under the Quick Links which is just under Course content link, you will see a link named *My Grades*.
+          4. Click on the *My Grades* link and you will all the grades for your exams, assignemnts and cats under that class.
+  utter_upcoming_assignments:
+  - buttons:
+    - payload: /check_upcoming_assignments_course
+      title: For a specific course
+    - payload: /check_upcoming_assignments_calendar  
+      title: See all via the calendar
+  utter_upcoming_assignments_course:
+  - text: This is one alternative for checking for any upcoming assignments in your classes. To get started, you first have to \:\n
+          1. Login to blackboard \n
+          2. On the landing page just after logging in, you will see *My courses* section which contains a list of courses you are currently enrolled in. Select the course you would like to check for assignments.\n
+          3. After selecting a course, scroll down a bit. On the left panel or side, under the Quick Links which is just under Course content link, you will see a link named *Assignments*.
+          4. Click on the *Assignments* link and you will any assignments posted by your lecturer.          
+  utter_upcoming_assignments_calendar:          
+  - text: Blackboard has a calendar which shows you all upcoming assignments from the current day as well past asisgnments if they have not disappeared. \n
+          To get started, you need to first\:\n
+          1. Login to blackboard \n
+          2. On the landing page just after logging in, you will see a column titled *Tools*. Under this column is where we have the *Calendar*.\n
+          3. Click in the *Calendar* link and you will be navigated to a page containing the calendar.\n
+          4. By default, the calendar shows you the month with all dates plus any assignment due on that day. You can click on any assignment and you can see more about the assignment.
+  utter_class_info:
+  - text: Okay. So you want to get to more information about a certain class. Below are the courses your enrolled in. Click on any or type in the course code.
+actions:
+- action_get_started
+entities:
+- class
+slots:      
+  class:
+    type: text
+    influence_conversation: false   
+forms:
+  class_form:
+    class:
+    - intent: get_class_info
+      type: from_text
+
