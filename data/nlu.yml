@@ -16,7 +16,6 @@ nlu:
     - goodevening
     - good afternoon
     - Yooh
-    
 - intent: goodbye
   examples: |
     - good afternoon
@@ -38,11 +37,8 @@ nlu:
     - ok thank you
     - ok thanks
     - hope to here from you soon
-
 - intent: affirm
   examples: |
-    - yes
-    - y
     - indeed
     - of course
     - that sounds good
@@ -61,7 +57,6 @@ nlu:
     - no way
     - not really
     - nop
-
 - intent: mood_great
   examples: |
     - perfect
@@ -78,7 +73,6 @@ nlu:
     - so so perfect
     - so good
     - so perfect
-
 - intent: mood_unhappy
   examples: |
     - my day was horrible
@@ -95,7 +89,6 @@ nlu:
     - extremly sad
     - so saad
     - so sad
-
 - intent: bot_challenge
   examples: |
     - are you a bot?
@@ -103,90 +96,105 @@ nlu:
     - am I talking to a bot?
     - am I talking to a human?
     - who is this
-    - who are you        
-
+    - who are you
 - intent: check_grades
   examples: |
-  - how do i check at my grades?
-  - what are my grades?
-  - how did i do in that exam?
-  - what marks did i get in that cat?
-  - have i passed or failed the exam?
-  - have i passed or failed the class?
-  - have the grades been released?
-
+    - how do i check at my grades?
+    - what are my grades?
+    - how did i do in that exam?
+    - what marks did i get in that cat?
+    - have i passed or failed the exam?
+    - have i passed or failed the class?
+    - have the grades been released?
+    - did i pass my exam
+    - how many marks did i get in the apt3020
+    - check marks
 - intent: check_upcoming_assignments
   examples: |
-  - how do i check for any assignments?
-  - do i have any new assignment?
-  - has the lecturer uploaded any assignment?
-  - what is due today?
-  - any homework left?
-  - any work given today?
-
+    - how do i check for any assignments?
+    - do i have any new assignment?
+    - has the lecturer uploaded any assignment?
+    - what is due today?
+    - any homework left?
+    - any work given today?
+    - what upcoming assignments do i have?
+    - what assignments do i have
+    - do i have any new assignments?
 - intent: check_upcoming_assignments_course
   examples: |
-  - via the course
-  - view for specific course  
-
+    - via the course
+    - view for specific course
+    - show assinos from a certain course
 - intent: check_upcoming_assignments_calendar
   examples: |
-  - via the calendar
-  - view all assignments
-
-- intent: get_class_info 
+    - via the calendar
+    - view all assignments
+    - show all assignments
+- intent: get_class_info
   examples: |
-  - what is APT3010 about?
-  - what is IST3050 about?
-  - what is the class about?
-  - what is taught in this class?
-  - what time does the class start?
-  - what time does the class end?
-  - when is the class?
-  - who teaches the class?
-  - which lecturer teaches the class?
-  - where is the class?
-  - under which building does the class take place?
-
+    - what is APT3010 about?
+    - what is IST3050 about?
+    - what is the class about?
+    - what is taught in this class?
+    - what time does the class start?
+    - what time does the class end?
+    - when is the class?
+    - who teaches the class?
+    - which lecturer teaches the class?
+    - where is the class?
+    - under which building does the class take place?
 - intent: how_to_pick_courses
   examples: |
-  - how do i pick courses?
-  - how do i register for new courses?
-  - how do i get into a new class?
-  - how to register for next semester classes  
-
+    - how do i pick courses?
+    - how do i register for new courses?
+    - how do i get into a new class?
+    - how to register for next semester classes
 - intent: how_to_drop_courses
   examples: |
-  - how do i drop a class?
-  - how do i deregister a class?
-  - how do i get out of a class?
-  - how do i drop a course?
-  - how to drop courses
-
+    - how do i drop a class?
+    - how do i deregister a class?
+    - how do i get out of a class?
+    - how do i drop a course?
+    - how to drop courses
 - intent: check_school_fees
   examples: |
-  - how much i am paying for next semester?
-  - what amount will i be paying next sem?
-  - school fees to be paid next semester?
-
+    - how much i am paying for next semester?
+    - what amount will i be paying next sem?
+    - school fees to be paid next semester?
 - intent: how_to_pay_school_fees
   examples: |
-  - how do i pay school fees?
-  - which payment methods are available to pay for school fees?
-  - can i pay via mpesa?
-  - can i do a bank deposit?
-  - does the school accept bank deposits?
-  - does the schoold accept mpesa payments?
-
+    - how do i pay school fees?
+    - which payment methods are available to pay for school fees?
+    - can i pay via mpesa?
+    - can i do a bank deposit?
+    - does the school accept bank deposits?
+    - does the schoold accept mpesa payments?
 - intent: how_to_change_usiu_password
   examples: |
-  - how do i change my password?
-  - how do i reset my password?
-  - i am locked out of blackboard. Please help!
-  - my account is locked
-
-
-
-
-
-
+    - how do i change my password?
+    - how do i reset my password?
+    - i am locked out of blackboard. Please help!
+    - my account is locked
+- intent: nlu_fallback
+  examples: |
+    - dnsdcnisnsdnbsccsnusnxisxunsoianxisaonxas
+    - dd  dsfsdfs fef ew ffsd fds fdsv s sdvdsv
+    - what is my credit balance
+    - can i speak to a real human
+- intent: stop
+  examples: |
+    - exit
+    - close
+    - stop
+    - cancel
+- intent: agreed_to_get_assignments
+  examples: |
+    - agreed to get assignments
+    - yes, get assignments for me
+    - its alright to get assignments for me
+    - APT3010
+- intent: refuse_to_get_assignments
+  examples: |
+    - i refuse to fetch assignments for me
+    - dont want you to fetch the assignments
+    - no, i dont want you to fetch the assignments

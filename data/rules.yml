@@ -1,13 +1,61 @@
 version: "2.0"
-
 rules:
-
 - rule: Say goodbye anytime the user says goodbye
   steps:
   - intent: goodbye
   - action: utter_goodbye
-
 - rule: Say 'I am a bot' anytime the user challenges
   steps:
   - intent: bot_challenge
   - action: utter_iamabot
+- rule: when affirmed
+  steps:
+  - intent: affirm
+  - action: utter_happy
+- rule: when denied
+  steps:
+  - intent: deny
+  - action: utter_not_wanted
+  - action: utter_how_else_can_i_help
+- rule: refuse to fetch assignments
+  steps:
+  - intent: refuse_to_get_assignments
+  - action: utter_refuse_to_get_assignments  
+- rule: Activate course_assignment_form
+  steps:  
+  - intent: agreed_to_get_assignments    
+  - action: utter_ask_create_course_assignment_form_course_code
+  - action: course_assignment_form
+  - active_loop: course_assignment_form
+- rule: Submit course_assignment_form
+  condition:
+  - active_loop: course_assignment_form
+  steps:
+  - action: course_assignment_form
+  - active_loop: null
+  - slot_was_set:
+    - requested_slot: null
+  - action: action_fetch_course_assignments
+  - action: action_reset_all_slots
+- rule: Ask the user to rephrase in case of low NLU confidence
+  steps:
+  - intent: nlu_fallback  
+  - action: utter_rephrase
+  - action: action_reset_all_slots  
+- rule: Exit an operation when the exit intent is hit
+  steps:
+  - intent: stop
+  - action: action_reset_all_slots
+  - action: action_deactivate_loop
+  - action: utter_not_wanted
+  - action: utter_how_else_can_i_help  
+- rule: Get assignments via calendar
+  steps:
+  - intent: check_upcoming_assignments_calendar
+  - action: utter_upcoming_assignments_calendar  
+  - action: utter_did_that_help  
+- rule: Get assignments via specific course
+  steps:
+  - intent: check_upcoming_assignments_course
+  - action: utter_upcoming_assignments_course  
+  - action: utter_ask_if_to_get_course_from_db

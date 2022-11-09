@@ -1,14 +1,11 @@
 version: "2.0"
-
 stories:
-
 - story: happy path
   steps:
   - intent: greet
   - action: action_get_started
   - intent: mood_great
   - action: utter_happy
-
 - story: sad path 1
   steps:
   - intent: greet
@@ -18,7 +15,6 @@ stories:
   - action: utter_did_that_help
   - intent: affirm
   - action: utter_happy
-
 - story: sad path 2
   steps:
   - intent: greet
@@ -27,4 +23,64 @@ stories:
   - action: utter_cheer_up
   - action: utter_did_that_help
   - intent: deny
-  - action: utter_goodbye
+  - action: utter_not_wanted
+  - action: utter_how_else_can_i_help
+- story: Checking grades - sad
+  steps:
+  - intent: greet
+  - action: action_get_started
+  - intent: check_grades
+  - action: utter_grades
+  - action: utter_did_that_help
+  - intent: deny
+  - action: utter_not_wanted
+  - action: utter_how_else_can_i_help
+  - intent: check_grades
+  - action: utter_grades
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+- story: Checking grades - happy
+  steps:
+  - intent: greet
+  - action: action_get_started
+  - intent: check_grades
+  - action: utter_grades
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy
+- story: Checking upcoming assignments via course
+  steps:
+  - intent: greet
+  - action: action_get_started
+  - intent: check_upcoming_assignments
+  - action: utter_upcoming_assignments
+  - intent: check_upcoming_assignments_course
+  - action: utter_upcoming_assignments_course
+  - action: utter_ask_if_to_get_course_from_db
+  - intent: agreed_to_get_assignments       
+  - action: utter_ask_create_course_assignment_form_course_code
+  - action: course_assignment_form
+  - active_loop: course_assignment_form
+  - slot_was_set:
+    - requested_slot: course_code    
+  - intent: agreed_to_get_assignments
+  - action: course_assignment_form
+  - slot_was_set:
+    - course_code: 'APT3010'
+  - slot_was_set:
+    - requested_slot: null
+  - active_loop: null
+  - action: action_fetch_course_assignments
+  - action: action_reset_all_slots    
+- story: Checking upcoming assignments via calendar
+  steps:
+  - intent: greet
+  - action: action_get_started
+  - intent: check_upcoming_assignments
+  - action: utter_upcoming_assignments
+  - intent: check_upcoming_assignments_calendar
+  - action: utter_upcoming_assignments_calendar
+  - action: utter_did_that_help
+  - intent: affirm
+  - action: utter_happy

@@ -21,8 +21,11 @@ from rasa.core.channels.channel import (
     CollectingOutputChannel,
     UserMessage,
 )
+from rasa_sdk.events import AllSlotsReset,FollowupAction
+import requests
 
 logger = logging.getLogger(__name__)
+backendServerUrl = "http://127.0.0.1:8000"
 
 # ******************************************************************************************************************************************
 # Helper functions **************************************************
@@ -63,6 +66,79 @@ class ActionGetStarted(Action):
         dispatcher.utter_message("My name is Buzz bot your USIU personal assistant.")
         dispatcher.utter_message("How may I help you?")
         return []
+
+class ActionResetAllSlots(Action):
+    '''
+    Class to reset all slots before asking for any form values
+    '''
+
+    def name(self):
+        return "action_reset_all_slots"
+
+    def run(self, dispatcher, tracker, domain):
+        return [AllSlotsReset()]
+
+class ActionFetchCourseAssignments(Action):
+    '''
+    Send a request to the backend server and fetch assignments of a particular course
+    '''
+
+    def name(self) -> Text:
+        return "action_fetch_course_assignments"
+
+    def run(self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+        metadata = extract_metadata_from_tracker(tracker)
+        userId="ddd"
+        token="dddd"
+        # try:
+        #     userId = metadata['metadata']['userId']  
+        #     token = metadata['metadata']['token']            
+        # except KeyError as error:
+        #     userId = ''   
+        #     token = ''     
+
+        payload = tracker.get_slot("course_code")
+        print("******************************")
+        print(payload)
+        print("******************************")
+
+        if payload == "exit" or payload == "stop" or payload == "cancel" or payload == "close":
+            dispatcher.utter_message(template="/stop")
+            return [FollowupAction("action_reset_all_slots")]
+        else:        
+            if payload and len(payload)!=7:
+                dispatcher.utter_message("Seem you entered a course code that does not exist. Re enter the course code & make sure its it follows the format > APT3010")
+                return []
+            dispatcher.utter_message("Fetching your assignments from "+payload+" ...")
+            response = getAssignments(payload,userId,token)
+            if(response.status_code == 201):
+                dispatcher.utter_message('Below are the assignments for the this class: ')
+                print("***********")
+                print(response)
+                print("***********")
+            else:
+                dispatcher.utter_message(template="/stop")                
+            return [FollowupAction("action_reset_all_slots")]        
+
+# ******************************************************************************************************************************************
+# Backend API Requests Section **************************************************
+# ******************************************************************************************************************************************
+
+def getAssignments(payload,userId,token):
+    '''
+    Get assignments for a specific course
+    '''
+    headers = {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer '+token
+    }    
+    url = backendServerUrl+'/getCourseAssignments/'+payload
+    # if data and userId and token:
+    response = requests.post(url, headers=headers)
+    return response
+    # else:
+        # res = {'status_code': 500}
+        # return res
 
 
 # ******************************************************************************************************************************************

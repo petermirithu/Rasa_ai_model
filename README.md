@@ -38,7 +38,7 @@ AI model for for the Rasa chat bot
 
 # Documentation
 ## How to connect to the AI bot
-* Use the api url: http://localhost:5005/webhooks/rest/webhook
+* Use the api url: http://localhost:5005/webhooks/RasaIO/webhook
 * Use POST method
 * Body of the post should be raw data, basically JSON in the format    
     
